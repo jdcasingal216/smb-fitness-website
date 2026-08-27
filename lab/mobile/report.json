@@ -1,0 +1,928 @@
+{
+  "doc": {
+    "height": 14575,
+    "vh": 812,
+    "acts": [
+      "scrub",
+      "flow",
+      "pin",
+      "pan",
+      "flow",
+      "flow",
+      "flow",
+      "flow",
+      "flow",
+      "pin"
+    ],
+    "world": null
+  },
+  "report": [
+    {
+      "i": 0,
+      "y": 0,
+      "pct": 0,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Strength that transforms your soul, mind",
+          "dir": "light-on-dark",
+          "worst": 7.66,
+          "mean": 8.68
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "dir": "light-on-dark",
+          "worst": 15.03,
+          "mean": 16.87
+        },
+        {
+          "t": "A premium fitness experience built aroun",
+          "dir": "light-on-dark",
+          "worst": 19.79,
+          "mean": 19.8
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "dir": "light-on-dark",
+          "worst": 17.72,
+          "mean": 17.72
+        }
+      ],
+      "cues": [
+        {
+          "t": "Strength that transforms your soul, mind, and ",
+          "o": 1
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "o": 1
+        },
+        {
+          "t": "A premium fitness experience built around expe",
+          "o": 1
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "o": 1
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual training",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        0,
+        3652,
+        4708,
+        13600
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 1,
+      "y": 32,
+      "pct": 0,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Strength that transforms your soul, mind",
+          "dir": "light-on-dark",
+          "worst": 7.56,
+          "mean": 8.59
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "dir": "light-on-dark",
+          "worst": 14.94,
+          "mean": 16.76
+        },
+        {
+          "t": "A premium fitness experience built aroun",
+          "dir": "light-on-dark",
+          "worst": 19.79,
+          "mean": 19.8
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "dir": "light-on-dark",
+          "worst": 17.72,
+          "mean": 17.72
+        }
+      ],
+      "cues": [
+        {
+          "t": "Strength that transforms your soul, mind, and ",
+          "o": 1
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "o": 1
+        },
+        {
+          "t": "A premium fitness experience built around expe",
+          "o": 1
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "o": 1
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual training",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        0,
+        3620,
+        4676,
+        13568
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 2,
+      "y": 1592,
+      "pct": 12,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        0,
+        2060,
+        3116,
+        12008
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 3,
+      "y": 1665,
+      "pct": 12,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        -41,
+        1987,
+        3043,
+        11935
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 4,
+      "y": 1705,
+      "pct": 12,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        -81,
+        1947,
+        3003,
+        11895
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 5,
+      "y": 1827,
+      "pct": 13,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        -203,
+        1825,
+        2881,
+        11773
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 6,
+      "y": 1949,
+      "pct": 14,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        -325,
+        1703,
+        2759,
+        11651
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 7,
+      "y": 3611,
+      "pct": 26,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -1987,
+        41,
+        1097,
+        9989
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 8,
+      "y": 3657,
+      "pct": 27,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "When doing it alone stops working",
+          "o": 0.16
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -2033,
+        0,
+        1051,
+        9943
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 9,
+      "y": 3891,
+      "pct": 28,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "SMB begins with understanding before int",
+          "dir": "light-on-dark",
+          "worst": 9.47,
+          "mean": 9.47
+        }
+      ],
+      "cues": [
+        {
+          "t": "SMB begins with understanding before intensity",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -2267,
+        0,
+        817,
+        9709
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 10,
+      "y": 4763,
+      "pct": 35,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -41
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -3139,
+        -867,
+        0,
+        8837
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 11,
+      "y": 7414,
+      "pct": 54,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2005
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -5790,
+        -3518,
+        0,
+        6186
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 12,
+      "y": 7504,
+      "pct": 55,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -5880,
+        -3608,
+        -35,
+        6096
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 13,
+      "y": 8487,
+      "pct": 62,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -6863,
+        -4591,
+        -1018,
+        5113
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 14,
+      "y": 9223,
+      "pct": 67,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -7599,
+        -5327,
+        -1754,
+        4377
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 15,
+      "y": 9708,
+      "pct": 71,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -8084,
+        -5812,
+        -2239,
+        3892
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 16,
+      "y": 10448,
+      "pct": 76,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -8824,
+        -6552,
+        -2979,
+        3152
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 17,
+      "y": 10531,
+      "pct": 77,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -8907,
+        -6635,
+        -3062,
+        3069
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 18,
+      "y": 11268,
+      "pct": 82,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -9644,
+        -7372,
+        -3799,
+        2332
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 19,
+      "y": 11840,
+      "pct": 86,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -10216,
+        -7944,
+        -4371,
+        1760
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 20,
+      "y": 12573,
+      "pct": 91,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -10949,
+        -8677,
+        -5104,
+        1027
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 21,
+      "y": 13565,
+      "pct": 99,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -11941,
+        -9669,
+        -6096,
+        35
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 22,
+      "y": 13604,
+      "pct": 99,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "Your next chapter can start here.",
+          "o": 0.02
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -11980,
+        -9708,
+        -6135,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 23,
+      "y": 13759,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Ready to feel stronger in every part of ",
+          "dir": "light-on-dark",
+          "worst": 12.51,
+          "mean": 16.51
+        },
+        {
+          "t": "Let’s talk about your goals and the kind",
+          "dir": "light-on-dark",
+          "worst": 19.8,
+          "mean": 19.8
+        },
+        {
+          "t": "Book your consultation",
+          "dir": "own-fill",
+          "worst": 9.8,
+          "mean": 9.8
+        }
+      ],
+      "cues": [
+        {
+          "t": "Ready to feel stronger in every part of your l",
+          "o": 1
+        },
+        {
+          "t": "Let’s talk about your goals and the kind of su",
+          "o": 1
+        },
+        {
+          "t": "Book your consultation",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -12135,
+        -9863,
+        -6290,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 24,
+      "y": 13763,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Ready to feel stronger in every part of ",
+          "dir": "light-on-dark",
+          "worst": 12.51,
+          "mean": 16.51
+        },
+        {
+          "t": "Let’s talk about your goals and the kind",
+          "dir": "light-on-dark",
+          "worst": 19.8,
+          "mean": 19.8
+        },
+        {
+          "t": "Book your consultation",
+          "dir": "own-fill",
+          "worst": 9.8,
+          "mean": 9.8
+        }
+      ],
+      "cues": [
+        {
+          "t": "Ready to feel stronger in every part of your l",
+          "o": 1
+        },
+        {
+          "t": "Let’s talk about your goals and the kind of su",
+          "o": 1
+        },
+        {
+          "t": "Book your consultation",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -2046
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -12139,
+        -9867,
+        -6294,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "failed": []
+}

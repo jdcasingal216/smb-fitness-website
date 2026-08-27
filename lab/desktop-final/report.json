@@ -1,0 +1,1228 @@
+{
+  "doc": {
+    "height": 15517,
+    "vh": 900,
+    "acts": [
+      "scrub",
+      "flow",
+      "pin",
+      "pan",
+      "flow",
+      "flow",
+      "flow",
+      "flow",
+      "flow",
+      "pin"
+    ],
+    "world": null
+  },
+  "report": [
+    {
+      "i": 0,
+      "y": 0,
+      "pct": 0,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Strength that transforms your soul, mind",
+          "dir": "light-on-dark",
+          "worst": 9.79,
+          "mean": 9.79
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "dir": "light-on-dark",
+          "worst": 13.02,
+          "mean": 17.27
+        },
+        {
+          "t": "A premium fitness experience built aroun",
+          "dir": "light-on-dark",
+          "worst": 19.79,
+          "mean": 19.8
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "dir": "light-on-dark",
+          "worst": 13.77,
+          "mean": 17.3
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual tr",
+          "dir": "light-on-dark",
+          "worst": 19.78,
+          "mean": 19.8
+        }
+      ],
+      "cues": [
+        {
+          "t": "Strength that transforms your soul, mind, and ",
+          "o": 1
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "o": 1
+        },
+        {
+          "t": "A premium fitness experience built around expe",
+          "o": 1
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "o": 1
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual training",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        0,
+        4284,
+        5454,
+        14437
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 1,
+      "y": 36,
+      "pct": 0,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Strength that transforms your soul, mind",
+          "dir": "light-on-dark",
+          "worst": 9.79,
+          "mean": 9.79
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "dir": "light-on-dark",
+          "worst": 13.02,
+          "mean": 17.18
+        },
+        {
+          "t": "A premium fitness experience built aroun",
+          "dir": "light-on-dark",
+          "worst": 19.79,
+          "mean": 19.8
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "dir": "light-on-dark",
+          "worst": 13.77,
+          "mean": 17.22
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual tr",
+          "dir": "light-on-dark",
+          "worst": 19.78,
+          "mean": 19.8
+        }
+      ],
+      "cues": [
+        {
+          "t": "Strength that transforms your soul, mind, and ",
+          "o": 1
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "o": 1
+        },
+        {
+          "t": "A premium fitness experience built around expe",
+          "o": 1
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "o": 1
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual training",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        0,
+        4248,
+        5418,
+        14401
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 2,
+      "y": 1764,
+      "pct": 12,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Strength that transforms your soul, mind",
+          "dir": "light-on-dark",
+          "worst": 7.4,
+          "mean": 9.27
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "dir": "light-on-dark",
+          "worst": 13.02,
+          "mean": 16.67
+        },
+        {
+          "t": "A premium fitness experience built aroun",
+          "dir": "light-on-dark",
+          "worst": 17.9,
+          "mean": 19.39
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "dir": "light-on-dark",
+          "worst": 13.77,
+          "mean": 16.8
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual tr",
+          "dir": "light-on-dark",
+          "worst": 4.64,
+          "mean": 14.23
+        }
+      ],
+      "cues": [
+        {
+          "t": "Strength that transforms your soul, mind, and ",
+          "o": 1
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "o": 1
+        },
+        {
+          "t": "A premium fitness experience built around expe",
+          "o": 1
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "o": 1
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual training",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        0,
+        2520,
+        3690,
+        12673
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 3,
+      "y": 1850,
+      "pct": 13,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Strength that transforms your soul, mind",
+          "dir": "light-on-dark",
+          "worst": 7.31,
+          "mean": 9.27
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "dir": "light-on-dark",
+          "worst": 13.02,
+          "mean": 16.66
+        },
+        {
+          "t": "A premium fitness experience built aroun",
+          "dir": "light-on-dark",
+          "worst": 17.9,
+          "mean": 19.38
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "dir": "light-on-dark",
+          "worst": 13.77,
+          "mean": 16.8
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual tr",
+          "dir": "light-on-dark",
+          "worst": 15.01,
+          "mean": 16.3
+        }
+      ],
+      "cues": [
+        {
+          "t": "Strength that transforms your soul, mind, and ",
+          "o": 1
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "o": 1
+        },
+        {
+          "t": "A premium fitness experience built around expe",
+          "o": 1
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "o": 1
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual training",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        -50,
+        2434,
+        3604,
+        12587
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 4,
+      "y": 1890,
+      "pct": 13,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Strength that transforms your soul, mind",
+          "dir": "light-on-dark",
+          "worst": 7.31,
+          "mean": 9.27
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "dir": "light-on-dark",
+          "worst": 13.02,
+          "mean": 16.66
+        },
+        {
+          "t": "A premium fitness experience built aroun",
+          "dir": "light-on-dark",
+          "worst": 17.9,
+          "mean": 19.38
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "dir": "light-on-dark",
+          "worst": 13.77,
+          "mean": 16.8
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual tr",
+          "dir": "light-on-dark",
+          "worst": 15.01,
+          "mean": 16.3
+        }
+      ],
+      "cues": [
+        {
+          "t": "Strength that transforms your soul, mind, and ",
+          "o": 1
+        },
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "o": 1
+        },
+        {
+          "t": "A premium fitness experience built around expe",
+          "o": 1
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "o": 1
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual training",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        -90,
+        2394,
+        3564,
+        12547
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 5,
+      "y": 2025,
+      "pct": 14,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "dir": "light-on-dark",
+          "worst": 12.87,
+          "mean": 16.61
+        },
+        {
+          "t": "A premium fitness experience built aroun",
+          "dir": "light-on-dark",
+          "worst": 17.9,
+          "mean": 19.38
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "dir": "light-on-dark",
+          "worst": 13.77,
+          "mean": 16.8
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual tr",
+          "dir": "light-on-dark",
+          "worst": 15.01,
+          "mean": 16.31
+        }
+      ],
+      "cues": [
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "o": 1
+        },
+        {
+          "t": "A premium fitness experience built around expe",
+          "o": 1
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "o": 1
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual training",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        -225,
+        2259,
+        3429,
+        12412
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 6,
+      "y": 2160,
+      "pct": 15,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "dir": "light-on-dark",
+          "worst": 12.87,
+          "mean": 16.56
+        },
+        {
+          "t": "A premium fitness experience built aroun",
+          "dir": "light-on-dark",
+          "worst": 17.9,
+          "mean": 19.38
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "dir": "light-on-dark",
+          "worst": 13.77,
+          "mean": 16.8
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual tr",
+          "dir": "light-on-dark",
+          "worst": 15,
+          "mean": 16.29
+        }
+      ],
+      "cues": [
+        {
+          "t": "Strong mind.Strong body.Strong you.",
+          "o": 1
+        },
+        {
+          "t": "A premium fitness experience built around expe",
+          "o": 1
+        },
+        {
+          "t": "Book your consultationExplore programs ↘",
+          "o": 1
+        },
+        {
+          "t": "Forney, Texas • In-person and virtual training",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "scrub",
+      "stages": [
+        -360,
+        2124,
+        3294,
+        12277
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 7,
+      "y": 4234,
+      "pct": 29,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -2434,
+        50,
+        1220,
+        10203
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 8,
+      "y": 4290,
+      "pct": 29,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "When doing it alone stops working",
+          "o": 0.18
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -2490,
+        0,
+        1164,
+        10147
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 9,
+      "y": 4549,
+      "pct": 31,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "When doing it alone stops working",
+          "dir": "light-on-dark",
+          "worst": 9.47,
+          "mean": 9.47
+        },
+        {
+          "t": "Starting again should not feel like star",
+          "dir": "light-on-dark",
+          "worst": 17.14,
+          "mean": 17.14
+        },
+        {
+          "t": "Maybe the plan keeps changing. Maybe you",
+          "dir": "light-on-dark",
+          "worst": 19.15,
+          "mean": 19.15
+        },
+        {
+          "t": "SMB begins with understanding before int",
+          "dir": "light-on-dark",
+          "worst": 9.47,
+          "mean": 9.47
+        }
+      ],
+      "cues": [
+        {
+          "t": "When doing it alone stops working",
+          "o": 1
+        },
+        {
+          "t": "Starting again should not feel like starting a",
+          "o": 1
+        },
+        {
+          "t": "Maybe the plan keeps changing. Maybe you are w",
+          "o": 1
+        },
+        {
+          "t": "SMB begins with understanding before intensity",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -2749,
+        0,
+        905,
+        9888
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 10,
+      "y": 5515,
+      "pct": 38,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -60
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -3715,
+        -961,
+        0,
+        8922
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 11,
+      "y": 8453,
+      "pct": 58,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2966
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -6653,
+        -3899,
+        0,
+        5984
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 12,
+      "y": 8550,
+      "pct": 58,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -6750,
+        -3996,
+        -36,
+        5887
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 13,
+      "y": 9456,
+      "pct": 65,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -7656,
+        -4902,
+        -942,
+        4981
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 14,
+      "y": 10278,
+      "pct": 70,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -8478,
+        -5724,
+        -1764,
+        4159
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 15,
+      "y": 10618,
+      "pct": 73,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -8818,
+        -6064,
+        -2104,
+        3819
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 16,
+      "y": 11440,
+      "pct": 78,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -9640,
+        -6886,
+        -2926,
+        2997
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 17,
+      "y": 11523,
+      "pct": 79,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -9723,
+        -6969,
+        -3009,
+        2914
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 18,
+      "y": 12346,
+      "pct": 84,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -10546,
+        -7792,
+        -3832,
+        2091
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 19,
+      "y": 12673,
+      "pct": 87,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -10873,
+        -8119,
+        -4159,
+        1764
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 20,
+      "y": 13496,
+      "pct": 92,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "flow",
+      "stages": [
+        -11696,
+        -8942,
+        -4982,
+        941
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 21,
+      "y": 14401,
+      "pct": 99,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -12601,
+        -9847,
+        -5887,
+        36
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 22,
+      "y": 14441,
+      "pct": 99,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "Your next chapter can start here.",
+          "o": 0.18
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -12641,
+        -9887,
+        -5927,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 23,
+      "y": 14614,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Your next chapter can start here.",
+          "dir": "light-on-dark",
+          "worst": 8.14,
+          "mean": 9.43
+        },
+        {
+          "t": "Ready to feel stronger in every part of ",
+          "dir": "light-on-dark",
+          "worst": 14.2,
+          "mean": 17.19
+        },
+        {
+          "t": "Let’s talk about your goals and the kind",
+          "dir": "light-on-dark",
+          "worst": 19.8,
+          "mean": 19.8
+        },
+        {
+          "t": "Book your consultation",
+          "dir": "own-fill",
+          "worst": 9.8,
+          "mean": 9.8
+        }
+      ],
+      "cues": [
+        {
+          "t": "Your next chapter can start here.",
+          "o": 1
+        },
+        {
+          "t": "Ready to feel stronger in every part of your l",
+          "o": 1
+        },
+        {
+          "t": "Let’s talk about your goals and the kind of su",
+          "o": 1
+        },
+        {
+          "t": "Book your consultation",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -12814,
+        -10060,
+        -6100,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    },
+    {
+      "i": 24,
+      "y": 14617,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Your next chapter can start here.",
+          "dir": "light-on-dark",
+          "worst": 8.14,
+          "mean": 9.43
+        },
+        {
+          "t": "Ready to feel stronger in every part of ",
+          "dir": "light-on-dark",
+          "worst": 14.2,
+          "mean": 17.19
+        },
+        {
+          "t": "Let’s talk about your goals and the kind",
+          "dir": "light-on-dark",
+          "worst": 19.8,
+          "mean": 19.8
+        },
+        {
+          "t": "Book your consultation",
+          "dir": "own-fill",
+          "worst": 9.8,
+          "mean": 9.8
+        }
+      ],
+      "cues": [
+        {
+          "t": "Your next chapter can start here.",
+          "o": 1
+        },
+        {
+          "t": "Ready to feel stronger in every part of your l",
+          "o": 1
+        },
+        {
+          "t": "Let’s talk about your goals and the kind of su",
+          "o": 1
+        },
+        {
+          "t": "Book your consultation",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -3026
+      ],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -12817,
+        -10063,
+        -6103,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#08090b"
+    }
+  ],
+  "consoleErrors": [],
+  "failed": []
+}

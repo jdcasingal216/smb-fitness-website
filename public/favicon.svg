@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="8" fill="#090a0c"/>
+  <path d="M8 14h48v5H8z" fill="#fca311"/>
+  <text x="32" y="45" text-anchor="middle" font-family="Impact,Arial Narrow,sans-serif" font-size="27" fill="#fff">SMB</text>
+</svg>
