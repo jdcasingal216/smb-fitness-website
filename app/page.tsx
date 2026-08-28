@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type { FormEvent } from 'react';
+import type { FormEvent, ReactNode } from 'react';
 
 declare global {
   interface Window {
@@ -122,6 +122,18 @@ function PrimaryCta({ label, onClick, className = '' }: PrimaryCtaProps) {
   );
 }
 
+function FooterIcon({ name }: { name: 'phone' | 'email' | 'location' | 'instagram' | 'facebook' | 'clock' }) {
+  const paths: Record<typeof name, ReactNode> = {
+    phone: <path d="M7.2 3.5 9 7.7 6.8 9a15 15 0 0 0 8.2 8.2l1.3-2.2 4.2 1.8v2.7a2 2 0 0 1-2 2C9.7 21.5 2.5 14.3 2.5 5.5a2 2 0 0 1 2-2h2.7Z" />,
+    email: <><rect x="2.5" y="4.5" width="19" height="15" rx="2" /><path d="m4 6 8 6 8-6" /></>,
+    location: <><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></>,
+    instagram: <><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none" /></>,
+    facebook: <path d="M14.5 21v-8h2.8l.4-3h-3.2V8.1c0-.9.3-1.6 1.7-1.6H18V3.8c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5V10H8v3h3v8h3.5Z" fill="currentColor" stroke="none" />,
+    clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" /></>,
+  };
+  return <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">{paths[name]}</svg>;
+}
+
 const faqs = [
   {
     question: 'Is SMB Fitness a one-size-fits-all program?',
@@ -155,7 +167,8 @@ function mountSmbScroll(root: HTMLElement) {
   const clamp = (value: number) => Math.min(1, Math.max(0, value));
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const acts = Array.from(root.querySelectorAll<HTMLElement>('[data-sc-act]')).map((element) => {
-    const device = element.dataset.scAct || 'flow';
+    const requestedDevice = element.dataset.scAct || 'flow';
+    const device = element.dataset.scMobileFlow === 'true' && window.innerWidth <= 760 ? 'flow' : requestedDevice;
     const stage = element.querySelector<HTMLElement>('[data-sc-stage]');
     if (device !== 'flow' && !reduceMotion) {
       const desktopSpan = Number(element.dataset.scSpan || 1.5);
@@ -178,7 +191,7 @@ function mountSmbScroll(root: HTMLElement) {
   const sequence = hero?.canvas;
   const frames: HTMLImageElement[] = [];
   let currentFrame = -1;
-  if (sequence) {
+  if (sequence && window.innerWidth > 1100) {
     for (let index = 1; index <= 180; index += 1) {
       const frame = new Image();
       frame.decoding = 'async';
@@ -220,55 +233,38 @@ function mountSmbScroll(root: HTMLElement) {
   root.querySelectorAll('[data-sc-in]').forEach((element) => revealObserver.observe(element));
   root.querySelectorAll('[data-primary-cta]').forEach((element) => revealObserver.observe(element));
 
-  const countObservers: IntersectionObserver[] = [];
-  root.querySelectorAll<HTMLElement>('[data-count-target]').forEach((counter) => {
-    const target = Number(counter.dataset.countTarget || 0);
-    const decimals = Number(counter.dataset.countDecimals || 0);
-    const suffix = counter.dataset.countSuffix || '';
-    let played = false;
-    const observer = new IntersectionObserver((entries) => {
-      if (!entries[0]?.isIntersecting || played) return;
-      played = true;
+  const trustArea = root.querySelector<HTMLElement>('[data-trust-trigger]');
+  let trustVisible = false;
+  let trustPlayed = false;
+  const playTrustCounters = () => {
+    if (!trustVisible || trustPlayed || window.scrollY < 24) return;
+    trustPlayed = true;
+    root.querySelectorAll<HTMLElement>('[data-count-target]').forEach((counter) => {
+      const target = Number(counter.dataset.countTarget || 0);
+      const decimals = Number(counter.dataset.countDecimals || 0);
+      const suffix = counter.dataset.countSuffix || '';
       if (reduceMotion) {
         counter.textContent = `${target.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}${suffix}`;
-        observer.disconnect();
         return;
       }
       const started = performance.now();
-      const duration = 1250;
       const animate = (now: number) => {
-        const progress = clamp((now - started) / duration);
+        const progress = clamp((now - started) / 1250);
         const eased = 1 - Math.pow(1 - progress, 3);
-        const value = target * eased;
-        counter.textContent = `${value.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}${suffix}`;
+        counter.textContent = `${(target * eased).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}${suffix}`;
         if (progress < 1) requestAnimationFrame(animate);
       };
       requestAnimationFrame(animate);
-      observer.disconnect();
-    }, { threshold: 0.6 });
-    observer.observe(counter);
-    countObservers.push(observer);
-  });
-
-  let awardPlayed = false;
-  const award = root.querySelector<HTMLElement>('[data-sc-count]');
-  const awardObserver = award && !reduceMotion ? new IntersectionObserver((entries) => {
-    if (!entries[0]?.isIntersecting || awardPlayed) return;
-    awardPlayed = true;
-    const start = performance.now();
-    const animate = (now: number) => {
-      const progress = clamp((now - start) / 120);
-      award.textContent = String(Math.round(2023 * (1 - Math.pow(1 - progress, 3))));
-      if (progress < 1) requestAnimationFrame(animate);
-    };
-    requestAnimationFrame(animate);
-  }, { threshold: 0.35 }) : null;
-  if (award && awardObserver) {
-    award.textContent = '0';
-    awardObserver.observe(award);
-  } else if (award) {
-    award.textContent = '2023';
-  }
+    });
+    trustObserver.disconnect();
+    window.removeEventListener('scroll', playTrustCounters);
+  };
+  const trustObserver = trustArea ? new IntersectionObserver((entries) => {
+    trustVisible = Boolean(entries[0]?.isIntersecting);
+    playTrustCounters();
+  }, { threshold: 0.45, rootMargin: '0px 0px -8% 0px' }) : null;
+  if (trustArea && trustObserver) trustObserver.observe(trustArea);
+  window.addEventListener('scroll', playTrustCounters, { passive: true });
 
   const read = () => {
     const viewport = window.innerHeight;
@@ -280,8 +276,10 @@ function mountSmbScroll(root: HTMLElement) {
 
       if (act.canvas) drawFrame(Math.round(progress * (frames.length - 1)));
       if (act.rail) {
-        const distance = Math.max(act.rail.scrollWidth - window.innerWidth + window.innerWidth * 0.08, 0);
-        act.rail.style.transform = `translate3d(${-distance * progress}px, 0, 0)`;
+        const viewportWidth = act.rail.parentElement?.clientWidth || window.innerWidth;
+        const distance = Math.max(act.rail.scrollWidth - viewportWidth + viewportWidth * 0.08, 0);
+        const reverse = act.rail.dataset.scDirection === 'reverse';
+        act.rail.style.transform = `translate3d(${reverse ? -distance * (1 - progress) : -distance * progress}px, 0, 0)`;
       }
       act.cues.forEach((cue) => {
         const values = (cue.dataset.scCue || '0').split(/\s+/).map(Number);
@@ -318,8 +316,8 @@ function mountSmbScroll(root: HTMLElement) {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', read);
       revealObserver.disconnect();
-      countObservers.forEach((observer) => observer.disconnect());
-      awardObserver?.disconnect();
+      trustObserver?.disconnect();
+      window.removeEventListener('scroll', playTrustCounters);
     },
   };
 }
@@ -330,6 +328,7 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [interest, setInterest] = useState('General consultation');
   const dialogRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
 
   const openConsultation = (nextInterest = 'General consultation') => {
     setInterest(nextInterest);
@@ -353,6 +352,22 @@ export default function Home() {
       previous?.focus();
     };
   }, [modalOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOutside = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) setMenuOpen(false);
+    };
+    const closeOnDesktop = () => {
+      if (window.innerWidth > 1100) setMenuOpen(false);
+    };
+    document.addEventListener('pointerdown', closeOutside);
+    window.addEventListener('resize', closeOnDesktop);
+    return () => {
+      document.removeEventListener('pointerdown', closeOutside);
+      window.removeEventListener('resize', closeOnDesktop);
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     document.documentElement.dataset.smbHydrated = 'true';
@@ -447,12 +462,12 @@ export default function Home() {
 
   return (
     <>
-      <header className="site-header">
+      <header className="site-header" ref={headerRef}>
         <a className="brand-mark" href="#home" aria-label="SMB Fitness home">
           <img src="/assets/smb-logo-white.png" alt="SMB Fitness" decoding="async" />
         </a>
         <nav className="desktop-nav" aria-label="Primary navigation">
-          <a href="#difference">About Us</a>
+          <a href="#about">About Us</a>
           <a href="#community">Community</a>
           <a href="#programs">Programs</a>
           <a href="#resources">Free Resources</a>
@@ -461,6 +476,10 @@ export default function Home() {
           <a href="#faq">FAQs</a>
         </nav>
         <PrimaryCta className="nav-cta" label="Book your free consultation" onClick={() => openConsultation()} />
+        <div className="header-contact" aria-label="Contact SMB Fitness">
+          <a href="tel:+12142398505">+1 214-239-8505</a>
+          <a href="mailto:info@smb.fitness">info@smb.fitness</a>
+        </div>
         <button
           className="menu-button"
           type="button"
@@ -468,18 +487,20 @@ export default function Home() {
           aria-controls="mobile-menu"
           onClick={() => setMenuOpen((open) => !open)}
         >
-          <span>Menu</span>
-          <span aria-hidden="true">{menuOpen ? '×' : '+'}</span>
+          <span className="sr-only">{menuOpen ? 'Close menu' : 'Open menu'}</span>
+          <span className={`hamburger ${menuOpen ? 'is-open' : ''}`} aria-hidden="true"><i /><i /><i /></span>
         </button>
         {menuOpen && (
           <nav id="mobile-menu" className="mobile-nav" aria-label="Mobile navigation">
-            <a href="#difference" onClick={() => setMenuOpen(false)}>About Us</a>
+            <a href="#about" onClick={() => setMenuOpen(false)}>About Us</a>
             <a href="#community" onClick={() => setMenuOpen(false)}>Community</a>
             <a href="#programs" onClick={() => setMenuOpen(false)}>Programs</a>
             <a href="#resources" onClick={() => setMenuOpen(false)}>Free Resources</a>
             <a href="#membership" onClick={() => setMenuOpen(false)}>Membership</a>
             <a href="#client-wins" onClick={() => setMenuOpen(false)}>Client Wins</a>
             <a href="#faq" onClick={() => setMenuOpen(false)}>FAQs</a>
+            <a href="tel:+12142398505" onClick={() => setMenuOpen(false)}>+1 214-239-8505</a>
+            <a href="mailto:info@smb.fitness" onClick={() => setMenuOpen(false)}>info@smb.fitness</a>
             <PrimaryCta className="mobile-cta" label="Book your free consultation" onClick={() => openConsultation()} />
           </nav>
         )}
@@ -499,8 +520,11 @@ export default function Home() {
           <div className="hero-stage" data-sc-stage>
             <div className="hero-film" aria-hidden="true">
               <canvas data-sc-sequence="/assets/frames/frame_{iiii}.webp:180:1" role="img" aria-label="SMB Fitness members training together" />
-              <video className="hero-poster" muted playsInline preload="none" poster="/assets/hero-poster.jpg">
+              <video className="hero-poster" muted playsInline preload="metadata" poster="/assets/hero-poster.jpg">
                 <source src="/assets/hero-smbf.mp4" type="video/mp4" />
+              </video>
+              <video className="hero-mobile-video" autoPlay muted loop playsInline preload="metadata" poster="/assets/hero-poster.jpg">
+                <source src="/assets/hero-smbf-mobile.mp4" type="video/mp4" />
               </video>
             </div>
             <div className="hero-vignette" />
@@ -511,19 +535,19 @@ export default function Home() {
                 Strong <span>body.</span><br />
                 Strong <span>you.</span>
               </h1>
-              <p className="hero-body" data-sc-cue="0.1 0.99 0.15 0.05">
+              <p className="hero-body" data-trust-trigger data-sc-cue="0.1 0.99 0.15 0.05">
                 Real transformation begins when your mind believes what your body can become. Build lasting strength, confidence, and discipline with coaching designed to move your whole life forward.
               </p>
               <div className="hero-actions" data-sc-cue="0.16 0.99 0.14 0.05" data-sc-rise="0">
                 <PrimaryCta label="Book your free consultation" onClick={() => openConsultation()} />
               </div>
               <div className="hero-trust" data-sc-cue="0.2 0.99 0.12 0.05">
-                <div aria-label="4.9 out of 5 stars, Member Rating">
-                  <strong aria-hidden="true"><span data-count-target="4.9" data-count-decimals="1">4.9</span> ★</strong>
-                  <span aria-hidden="true">Member Rating</span>
+                <div aria-label="4.9 out of 5 Star Rating">
+                  <strong aria-hidden="true"><span data-count-target="4.9" data-count-decimals="1">0.0</span>/5</strong>
+                  <span aria-hidden="true">Star Rating</span>
                 </div>
-                <div aria-label="2,050 plus Members Joined">
-                  <strong aria-hidden="true" data-count-target="2050" data-count-suffix="+">2,050+</strong>
+                <div aria-label="2,050 Members Joined">
+                  <strong aria-hidden="true" data-count-target="2050">0</strong>
                   <span aria-hidden="true">Members Joined</span>
                 </div>
               </div>
@@ -532,22 +556,32 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="community" className="community-section sc-section" data-sc-act="flow" data-sc-drift="#14213d">
-          <img className="community-watermark" src="/assets/smb-logo-white.png" alt="" aria-hidden="true" />
-          <div className="community-montage" aria-label="SMB Fitness members training together">
-            <figure className="community-card community-card--one" data-sc-in><img src="/assets/community-01.webp" alt="Young SMB Fitness community members celebrating after an outdoor activity" loading="lazy" decoding="async" /></figure>
-            <figure className="community-card community-card--two" data-sc-in><img src="/assets/community-02.webp" alt="SMB Fitness members smiling together during a neighborhood strength workout" loading="lazy" decoding="async" /></figure>
-            <figure className="community-card community-card--three" data-sc-in><img src="/assets/community-03.webp" alt="SMB Fitness members gathered after an outdoor group training session" loading="lazy" decoding="async" /></figure>
-            <figure className="community-card community-card--four" data-sc-in><img src="/assets/community-04.webp" alt="SMB Fitness community taking part in an evening outdoor workout" loading="lazy" decoding="async" /></figure>
-            <figure className="community-card community-card--five" data-sc-in><img src="/assets/community-05.webp" alt="SMB Fitness challenge group celebrating together" loading="lazy" decoding="async" /></figure>
-            <figure className="community-card community-card--six" data-sc-in><img src="/assets/community-06.webp" alt="SMB Fitness members completing a poolside wellness challenge" loading="lazy" decoding="async" /></figure>
-            <figure className="community-card community-card--seven" data-sc-in><img src="/assets/community-07.webp" alt="SMB Fitness community celebrating together at a pool gathering" loading="lazy" decoding="async" /></figure>
-          </div>
-          <div className="community-copy" data-sc-in>
-            <p className="eyebrow">The SMB Fitness community</p>
-            <h2>Come for the workout.<br /><span>Stay for the people.</span></h2>
-            <p>Good energy. Real encouragement. A community that celebrates every win and helps you keep showing up, one stronger day at a time.</p>
-            <PrimaryCta label="Find your place at SMB" onClick={() => openConsultation('SMB Fitness community')} />
+        <section id="community" className="community-section" data-sc-act="pan" data-sc-span="2.7" data-sc-mobile-span="2.2" data-sc-mobile-flow="true" data-sc-drift="#14213d">
+          <div className="community-stage" data-sc-stage>
+            <img className="community-watermark" src="/assets/smb-logo-white.png" alt="" aria-hidden="true" />
+            <div className="community-copy" data-sc-in>
+              <p className="eyebrow">The SMB Fitness community</p>
+              <h2>Come for the workout.<br /><span>Stay for the people.</span></h2>
+              <p>Good energy. Real encouragement. A community that celebrates every win and helps you keep showing up—one stronger day at a time.</p>
+              <PrimaryCta label="Find your place at SMB" onClick={() => openConsultation('SMB Fitness community')} />
+              <div id="about" className="about-us-panel">
+                <p className="eyebrow">About us</p>
+                <p><strong>SMB Fitness is a veteran owned personal training service business.</strong></p>
+                <p>SMB Fitness is a brand that promotes transformation within the soul, mind, and body. We believe that your body can withstand almost anything. Once you convince your mind you are unstoppable! That&apos;s where the real transformation starts. We take pride and are passionate about getting you to your goals!</p>
+                <p>Our programs will not only motivate you but build your self-confidence and increase discipline allowing you to unleash your fullest potential.</p>
+              </div>
+            </div>
+            <div className="community-viewport" aria-label="SMB Fitness community photo story">
+              <div className="community-montage" data-sc-pan="0.08" data-sc-direction="reverse">
+                <figure className="community-card"><img src="/assets/community-01.webp" alt="Young SMB Fitness community members celebrating after an outdoor activity" loading="lazy" decoding="async" /></figure>
+                <figure className="community-card"><img src="/assets/community-02.webp" alt="SMB Fitness members smiling together during a neighborhood strength workout" loading="lazy" decoding="async" /></figure>
+                <figure className="community-card"><img src="/assets/community-03.webp" alt="SMB Fitness members gathered after an outdoor group training session" loading="lazy" decoding="async" /></figure>
+                <figure className="community-card"><img src="/assets/community-04.webp" alt="SMB Fitness community taking part in an evening outdoor workout" loading="lazy" decoding="async" /></figure>
+                <figure className="community-card"><img src="/assets/community-05.webp" alt="SMB Fitness challenge group celebrating together" loading="lazy" decoding="async" /></figure>
+                <figure className="community-card"><img src="/assets/community-06.webp" alt="SMB Fitness members completing a poolside wellness challenge" loading="lazy" decoding="async" /></figure>
+                <figure className="community-card"><img src="/assets/community-07.webp" alt="SMB Fitness community celebrating together at a pool gathering" loading="lazy" decoding="async" /></figure>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -621,7 +655,17 @@ export default function Home() {
             <blockquote>“I have come such a long way since working with Stacia, both physically and mentally! I’m stronger than I’ve ever been and have more confidence than I’ve had in a long time. Her ability to help you achieve results and her supportive nature have built a dedicated community that will truly improve your soul, mind and body!”</blockquote>
             <p className="attribution">Allie Hausmann</p>
           </div>
-          <div className="award-mark" data-sc-in><span data-sc-count="0 2023">2023</span><p>Best of Forney Award</p></div>
+        </section>
+
+        <section id="award" className="award-section sc-section" data-sc-act="flow" data-sc-drift="#090a0c">
+          <div className="section-shell award-shell">
+            <figure className="award-photo" data-sc-in><img src="/assets/forney-award-2023.png" alt="SMB Fitness 2023 Best of Forney personal trainer award" loading="lazy" decoding="async" /></figure>
+            <div className="award-copy" data-sc-in>
+              <p className="eyebrow">Local recognition</p>
+              <h2>2023 Best of Forney Award</h2>
+              <p>Each year, in and around the Forney area, the Forney Award Program chooses only the best local businesses. We focus on companies that have demonstrated their ability to use various marketing methods to grow their business in spite of difficult economic times. The companies chosen exemplify the best of small business; often leading through customer service and community involvement. For most companies, this recognition is a result of your dedication and efforts as well as the work of others in your organization that have helped build your business.</p>
+            </div>
+          </div>
         </section>
 
         <section id="resources" className="resources-section sc-section" data-sc-act="flow" data-sc-drift="#f3f0ea">
@@ -644,26 +688,24 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="client-wins" className="client-wins-section sc-section" data-sc-act="flow" data-sc-drift="#14213d">
-          <div className="section-shell client-wins-intro" data-sc-in>
-            <div>
-              <p className="eyebrow">Real progress. Real people.</p>
-              <h2>Client <span>wins.</span></h2>
+        <section id="client-wins" className="client-wins-section" data-sc-act="pan" data-sc-span="3.8" data-sc-mobile-span="3.2" data-sc-drift="#14213d">
+          <div className="client-wins-stage" data-sc-stage>
+            <div className="client-wins-gallery" data-sc-pan="0.08" aria-label="SMB Fitness client progress gallery">
+              <article className="client-wins-intro">
+                <p className="eyebrow">Real progress. Real people.</p>
+                <h2>Client <span>wins.</span></h2>
+                <p>Every transformation has its own pace, challenges, and victories. These are real SMB Fitness clients building strength, confidence, and consistency one decision at a time.</p>
+                <PrimaryCta label="Start your own story" onClick={() => openConsultation('Client wins')} />
+              </article>
+              {clientWins.map((win) => (
+                <figure className="client-win-card" key={win.id}>
+                  <img src={win.image} alt={win.alt} loading="lazy" decoding="async" />
+                  <figcaption><span>Client win</span><strong>{win.id}</strong></figcaption>
+                </figure>
+              ))}
             </div>
-            <div className="client-wins-lede">
-              <p>Every transformation has its own pace, challenges, and victories. These are real SMB Fitness clients building strength, confidence, and consistency one decision at a time.</p>
-              <PrimaryCta label="Start your own story" onClick={() => openConsultation('Client wins')} />
-            </div>
+            <p className="client-wins-note">Individual results vary. Each image reflects one client’s personal journey.</p>
           </div>
-          <div className="client-wins-gallery" aria-label="SMB Fitness client progress gallery">
-            {clientWins.map((win) => (
-              <figure className="client-win-card" key={win.id} data-sc-in>
-                <img src={win.image} alt={win.alt} loading="lazy" decoding="async" />
-                <figcaption><span>Client win</span><strong>{win.id}</strong></figcaption>
-              </figure>
-            ))}
-          </div>
-          <p className="client-wins-note section-shell">Individual results vary. Each image reflects one client’s personal journey.</p>
         </section>
 
         <section id="faq" className="faq-section sc-section" data-sc-act="flow" data-sc-drift="#e5e5e5">
@@ -689,8 +731,18 @@ export default function Home() {
               <p data-sc-cue="0.1 0.99">Let’s talk about your goals and the kind of support that will help you move forward.</p>
               <div data-sc-cue="0.14 0.99" data-sc-rise="0"><PrimaryCta label="Book your free consultation" onClick={() => openConsultation()} /></div>
             </div>
-            <footer className="site-footer">
-              <span>SMB Fitness</span><a href="tel:+12142398505">214-239-8505</a><a href="mailto:info@smb.fitness">info@smb.fitness</a><span>Forney, Texas</span>
+            <footer className="site-footer" aria-label="SMB Fitness footer">
+              <a className="footer-brand" href="#home" aria-label="SMB Fitness home"><img src="/assets/smb-logo-white.png" alt="SMB Fitness" /></a>
+              <div className="footer-contact">
+                <a href="tel:+12142398505"><FooterIcon name="phone" /><span>+1 214-239-8505</span></a>
+                <a href="mailto:info@smb.fitness"><FooterIcon name="email" /><span>info@smb.fitness</span></a>
+                <span><FooterIcon name="location" /><span>Forney, Texas</span></span>
+              </div>
+              <div className="footer-hours"><FooterIcon name="clock" /><div><span>Mon–Thu — 5:00AM–8:00PM</span><span>Sat — 7:00AM–12:00PM</span><span>Sun — Closed</span></div></div>
+              <div className="footer-social" aria-label="Social media">
+                <a href="https://www.instagram.com/_smbfitness?igsi=bTVkYWVocmw2NmMx" target="_blank" rel="noreferrer" aria-label="SMB Fitness on Instagram"><FooterIcon name="instagram" /></a>
+                <a href="https://www.facebook.com/smbfitnesss/" target="_blank" rel="noreferrer" aria-label="SMB Fitness on Facebook"><FooterIcon name="facebook" /></a>
+              </div>
             </footer>
           </div>
         </section>

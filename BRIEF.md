@@ -94,3 +94,10 @@ The primary CTA is “BOOK YOUR CONSULTATION.” Until the client provides a GoH
 - A dedicated Client Wins section appears immediately before FAQs and uses the six supplied progress images (files 01, 02, 04, 05, 06, and 07).
 - All primary conversion buttons share one restrained gold pill treatment.
 - The official transparent SMB Fitness logo replaces the typeset final-section watermark.
+- Mobile and tablet hero media uses the later client-supplied `SMBF.mp4`; desktop retains the high-resolution scroll sequence.
+- About Us navigation lands inside the community bridge and presents the exact veteran-owned, soul/mind/body brand message supplied by the client.
+- The community montage moves left-to-right as an editorial orbit; Client Wins moves right-to-left in one continuous row.
+- Trust copy is exactly “4.9/5 Star Rating” and “2,050 Members Joined,” and begins only after the explanatory hero copy enters view and the visitor scrolls.
+- The uploaded 2023 Best of Forney award and client-supplied description now have a dedicated credibility section.
+- Header and footer contact details use `tel:` and `mailto:` links, while footer social links use accessible icons rather than raw URLs.
+- The matching GoHighLevel single-file export lives at `exports/smb-fitness-gohighlevel.html` and intentionally points at the published asset host.
