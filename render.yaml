@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: smb-fitness
+    runtime: node
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /
+    buildCommand: pnpm install --frozen-lockfile && pnpm run build
+    startCommand: pnpm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
