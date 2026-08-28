@@ -39,7 +39,7 @@ Interview answers supplied through the attached client brief.
 
 6. **Aesthetic direction**
    - “Use a premium editorial fitness aesthetic.”
-   - “Use oversized Impact headlines, Roboto body copy, bold asymmetrical layouts, dark cinematic imagery, orange accents, strong black-and-white contrast, and controlled negative space.”
+   - “Use oversized Marathon Regular headlines, Roboto body copy, bold asymmetrical layouts, dark cinematic imagery, orange accents, strong black-and-white contrast, and controlled negative space.”
    - Palette supplied in the brand reference: #FFFFFF, #E5E5E5, #FCA311, #14213D, #000000.
 
 7. **Section continuity**
@@ -47,10 +47,10 @@ Interview answers supplied through the attached client brief.
    - “Make the transition feel seamless, as if the visitor is moving from a short brand film into the real SMB Fitness experience.”
 
 8. **Assets supplied**
-   - SMB2.mp4
+   - SMBF.mp4
    - SMB Fitness logo reference
    - Existing SMB Fitness page screenshot
-   - Typography reference: Impact + Roboto
+   - Typography reference: Marathon Regular + Roboto. Marathon is referenced first in the production font stack; the licensed font file is still required for guaranteed cross-device rendering.
    - Black, white, gray, gold, and navy palette reference
    - SM1.png through SM6.png program photography
    - Existing approved SMB Fitness copy and conversion brief
@@ -63,7 +63,7 @@ Interview answers supplied through the attached client brief.
 | Belief | Grounded reassurance through Soul, Mind, and Body. |
 | Empathy | A quieter pause that names why doing this alone is hard. |
 | Range / Peak | Energy and breadth as programs move sideways through the SMB system. |
-| Proof | Reflective credibility through the real Stacia testimonial and award. |
+| Proof | Reflective credibility through the real Stacia testimonial, award, and client progress gallery. |
 | Clarity | Simple consultation steps, resources, membership guidance, and FAQs. |
 | Commitment | Decisive close with one clear booking action. |
 
@@ -87,8 +87,10 @@ The primary CTA is “BOOK YOUR CONSULTATION.” Until the client provides a GoH
 
 - The full hero film is visible immediately; the former circular reveal is removed.
 - Hero message: “STRONG MIND. STRONG BODY. STRONG YOU.” with MIND, BODY, and YOU in SMB gold.
-- Trust indicators: 4.9 member rating and 1,050+ members joined, presented as client-supplied copy.
-- The hero flows directly into an editorial SMB community bridge using real frames from the client-supplied SMB2 film.
+- Trust indicators: 4.9 member rating and 2,050+ members joined, presented as client-supplied copy.
+- The hero uses the client-supplied SMBF film as a 20-second frame-by-frame scroll sequence with its audio removed.
+- The hero flows directly into an editorial SMB community bridge using all seven client-supplied community photos.
 - The eight program cards use the exact licensed Adobe Stock assets supplied for Virtual Training, Private Coaching, Goal Setting & Tracking, Nutrition Plans, Specialty Programs, Individual Approach, Real Results, and Educate.
+- A dedicated Client Wins section appears immediately before FAQs and uses the six supplied progress images (files 01, 02, 04, 05, 06, and 07).
 - All primary conversion buttons share one restrained gold pill treatment.
 - The official transparent SMB Fitness logo replaces the typeset final-section watermark.

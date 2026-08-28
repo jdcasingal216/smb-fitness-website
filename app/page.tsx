@@ -70,6 +70,39 @@ const programs = [
   },
 ];
 
+const clientWins = [
+  {
+    id: '01',
+    image: '/assets/client-win-01.webp',
+    alt: 'Side-by-side progress photos from an SMB Fitness client journey',
+  },
+  {
+    id: '02',
+    image: '/assets/client-win-02.webp',
+    alt: 'Side-profile progress photos from an SMB Fitness client journey',
+  },
+  {
+    id: '04',
+    image: '/assets/client-win-04.webp',
+    alt: 'Front-view progress photos from an SMB Fitness client journey',
+  },
+  {
+    id: '05',
+    image: '/assets/client-win-05.webp',
+    alt: 'Lifestyle progress photos from an SMB Fitness client journey',
+  },
+  {
+    id: '06',
+    image: '/assets/client-win-06.webp',
+    alt: 'Athletic progress photos from an SMB Fitness client journey',
+  },
+  {
+    id: '07',
+    image: '/assets/client-win-07.webp',
+    alt: 'Postpartum-to-active-lifestyle progress photos from an SMB Fitness client journey',
+  },
+];
+
 type PrimaryCtaProps = {
   label: string;
   onClick: () => void;
@@ -424,6 +457,7 @@ export default function Home() {
           <a href="#programs">Programs</a>
           <a href="#resources">Free Resources</a>
           <a href="#membership">Membership</a>
+          <a href="#client-wins">Client Wins</a>
           <a href="#faq">FAQs</a>
         </nav>
         <PrimaryCta className="nav-cta" label="Book your free consultation" onClick={() => openConsultation()} />
@@ -444,6 +478,7 @@ export default function Home() {
             <a href="#programs" onClick={() => setMenuOpen(false)}>Programs</a>
             <a href="#resources" onClick={() => setMenuOpen(false)}>Free Resources</a>
             <a href="#membership" onClick={() => setMenuOpen(false)}>Membership</a>
+            <a href="#client-wins" onClick={() => setMenuOpen(false)}>Client Wins</a>
             <a href="#faq" onClick={() => setMenuOpen(false)}>FAQs</a>
             <PrimaryCta className="mobile-cta" label="Book your free consultation" onClick={() => openConsultation()} />
           </nav>
@@ -464,7 +499,9 @@ export default function Home() {
           <div className="hero-stage" data-sc-stage>
             <div className="hero-film" aria-hidden="true">
               <canvas data-sc-sequence="/assets/frames/frame_{iiii}.webp:180:1" role="img" aria-label="SMB Fitness members training together" />
-              <img className="hero-poster" src="/assets/hero-poster.jpg" alt="" fetchPriority="high" />
+              <video className="hero-poster" muted playsInline preload="none" poster="/assets/hero-poster.jpg">
+                <source src="/assets/hero-smbf.mp4" type="video/mp4" />
+              </video>
             </div>
             <div className="hero-vignette" />
             <div className="hero-copy align-left">
@@ -485,8 +522,8 @@ export default function Home() {
                   <strong aria-hidden="true"><span data-count-target="4.9" data-count-decimals="1">4.9</span> ★</strong>
                   <span aria-hidden="true">Member Rating</span>
                 </div>
-                <div aria-label="1,050 plus Members Joined">
-                  <strong aria-hidden="true" data-count-target="1050" data-count-suffix="+">1,050+</strong>
+                <div aria-label="2,050 plus Members Joined">
+                  <strong aria-hidden="true" data-count-target="2050" data-count-suffix="+">2,050+</strong>
                   <span aria-hidden="true">Members Joined</span>
                 </div>
               </div>
@@ -498,15 +535,18 @@ export default function Home() {
         <section id="community" className="community-section sc-section" data-sc-act="flow" data-sc-drift="#14213d">
           <img className="community-watermark" src="/assets/smb-logo-white.png" alt="" aria-hidden="true" />
           <div className="community-montage" aria-label="SMB Fitness members training together">
-            <figure className="community-card community-card--one" data-sc-in><img src="/assets/community-01.webp" alt="SMB Fitness members training with weight plates" loading="lazy" decoding="async" /></figure>
-            <figure className="community-card community-card--two" data-sc-in><img src="/assets/community-02.webp" alt="SMB Fitness member completing a supported training set" loading="lazy" decoding="async" /></figure>
-            <figure className="community-card community-card--three" data-sc-in><img src="/assets/community-03.webp" alt="SMB Fitness members training with resistance straps" loading="lazy" decoding="async" /></figure>
-            <figure className="community-card community-card--four" data-sc-in><img src="/assets/community-04.webp" alt="SMB Fitness members encouraging each other during an outdoor workout" loading="lazy" decoding="async" /></figure>
+            <figure className="community-card community-card--one" data-sc-in><img src="/assets/community-01.webp" alt="Young SMB Fitness community members celebrating after an outdoor activity" loading="lazy" decoding="async" /></figure>
+            <figure className="community-card community-card--two" data-sc-in><img src="/assets/community-02.webp" alt="SMB Fitness members smiling together during a neighborhood strength workout" loading="lazy" decoding="async" /></figure>
+            <figure className="community-card community-card--three" data-sc-in><img src="/assets/community-03.webp" alt="SMB Fitness members gathered after an outdoor group training session" loading="lazy" decoding="async" /></figure>
+            <figure className="community-card community-card--four" data-sc-in><img src="/assets/community-04.webp" alt="SMB Fitness community taking part in an evening outdoor workout" loading="lazy" decoding="async" /></figure>
+            <figure className="community-card community-card--five" data-sc-in><img src="/assets/community-05.webp" alt="SMB Fitness challenge group celebrating together" loading="lazy" decoding="async" /></figure>
+            <figure className="community-card community-card--six" data-sc-in><img src="/assets/community-06.webp" alt="SMB Fitness members completing a poolside wellness challenge" loading="lazy" decoding="async" /></figure>
+            <figure className="community-card community-card--seven" data-sc-in><img src="/assets/community-07.webp" alt="SMB Fitness community celebrating together at a pool gathering" loading="lazy" decoding="async" /></figure>
           </div>
           <div className="community-copy" data-sc-in>
             <p className="eyebrow">The SMB Fitness community</p>
             <h2>Come for the workout.<br /><span>Stay for the people.</span></h2>
-            <p>Good energy. Real encouragement. A community that celebrates every win and helps you keep showing up—one stronger day at a time.</p>
+            <p>Good energy. Real encouragement. A community that celebrates every win and helps you keep showing up, one stronger day at a time.</p>
             <PrimaryCta label="Find your place at SMB" onClick={() => openConsultation('SMB Fitness community')} />
           </div>
         </section>
@@ -602,6 +642,28 @@ export default function Home() {
             <p>SMB membership guidance is personal. Use the consultation to understand current options, availability, and which program best fits your goals.</p>
             <PrimaryCta label="Explore membership" onClick={() => openConsultation('Membership options')} />
           </div>
+        </section>
+
+        <section id="client-wins" className="client-wins-section sc-section" data-sc-act="flow" data-sc-drift="#14213d">
+          <div className="section-shell client-wins-intro" data-sc-in>
+            <div>
+              <p className="eyebrow">Real progress. Real people.</p>
+              <h2>Client <span>wins.</span></h2>
+            </div>
+            <div className="client-wins-lede">
+              <p>Every transformation has its own pace, challenges, and victories. These are real SMB Fitness clients building strength, confidence, and consistency one decision at a time.</p>
+              <PrimaryCta label="Start your own story" onClick={() => openConsultation('Client wins')} />
+            </div>
+          </div>
+          <div className="client-wins-gallery" aria-label="SMB Fitness client progress gallery">
+            {clientWins.map((win) => (
+              <figure className="client-win-card" key={win.id} data-sc-in>
+                <img src={win.image} alt={win.alt} loading="lazy" decoding="async" />
+                <figcaption><span>Client win</span><strong>{win.id}</strong></figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="client-wins-note section-shell">Individual results vary. Each image reflects one client’s personal journey.</p>
         </section>
 
         <section id="faq" className="faq-section sc-section" data-sc-act="flow" data-sc-drift="#e5e5e5">
