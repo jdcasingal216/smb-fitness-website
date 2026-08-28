@@ -82,3 +82,13 @@ The challenges scene immediately before Programs & Services is intentionally qui
 ## Conversion constraint
 
 The primary CTA is “BOOK YOUR CONSULTATION.” Until the client provides a GoHighLevel calendar or form URL, the prospect build uses an accessible on-page consultation form with a local thank-you state and clearly documented CRM handoff fields. It must not claim that a CRM submission occurred.
+
+## Client-approved revision
+
+- The full hero film is visible immediately; the former circular reveal is removed.
+- Hero message: “STRONG MIND. STRONG BODY. STRONG YOU.” with MIND, BODY, and YOU in SMB gold.
+- Trust indicators: 4.9 member rating and 1,050+ members joined, presented as client-supplied copy.
+- The hero flows directly into an editorial SMB community bridge using real frames from the client-supplied SMB2 film.
+- The eight program cards use the exact licensed Adobe Stock assets supplied for Virtual Training, Private Coaching, Goal Setting & Tracking, Nutrition Plans, Specialty Programs, Individual Approach, Real Results, and Educate.
+- All primary conversion buttons share one restrained gold pill treatment.
+- The official transparent SMB Fitness logo replaces the typeset final-section watermark.

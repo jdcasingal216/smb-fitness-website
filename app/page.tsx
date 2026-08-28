@@ -13,36 +13,81 @@ declare global {
 
 const programs = [
   {
-    name: 'Custom App Programs',
+    name: 'Virtual Training',
     pillar: 'Mind',
-    image: '/assets/program-1.webp',
-    copy: 'Structured workouts and guidance in a flexible format you can carry anywhere.',
+    image: '/assets/service-01.webp',
+    alt: 'Two SMB Fitness members following a virtual workout from home',
+    copy: 'Coach-led structure and accountability wherever you train.',
   },
   {
     name: 'Private Coaching',
     pillar: 'Body',
-    image: '/assets/program-2.webp',
-    copy: 'Personal attention built around your goals, fitness level, and abilities.',
+    image: '/assets/service-02.webp',
+    alt: 'Personal trainer supporting a client through a suspension exercise',
+    copy: 'Focused one-to-one attention built around your goals and abilities.',
   },
   {
     name: 'Goal Setting & Tracking',
     pillar: 'Mind',
-    image: '/assets/program-4.webp',
+    image: '/assets/service-03.webp',
+    alt: 'Coach and member reviewing a written fitness plan together',
     copy: 'A clear route from where you are now to what you are working toward.',
   },
   {
     name: 'Nutrition Plans',
     pillar: 'Body',
-    image: '/assets/program-3.webp',
+    image: '/assets/service-04.webp',
+    alt: 'Nutrition coaching session with a laptop, clipboard, and fresh produce',
     copy: 'Nutrition guidance designed to support the work you do in training.',
   },
   {
     name: 'Specialty Programs',
     pillar: 'Soul',
-    image: '/assets/program-6.webp',
+    image: '/assets/service-05.webp',
+    alt: 'Mixed-age group taking part in a guided specialty fitness program',
     copy: 'Focused programs for specific goals, seasons, and challenges.',
   },
+  {
+    name: 'Individual Approach',
+    pillar: 'Soul',
+    image: '/assets/service-06.webp',
+    alt: 'Trainer giving close personal guidance during a dumbbell exercise',
+    copy: 'Training shaped around your starting point, schedule, and progress.',
+  },
+  {
+    name: 'Real Results',
+    pillar: 'Mind',
+    image: '/assets/service-07.webp',
+    alt: 'Mature gym member smiling while discussing progress with a coach',
+    copy: 'Consistent coaching, useful feedback, and wins you can build on.',
+  },
+  {
+    name: 'Educate',
+    pillar: 'Body',
+    image: '/assets/service-08.webp',
+    alt: 'Trainer teaching a member correct cable-exercise posture and form',
+    copy: 'Learn the form, habits, and reasoning that make progress sustainable.',
+  },
 ];
+
+type PrimaryCtaProps = {
+  label: string;
+  onClick: () => void;
+  className?: string;
+};
+
+function PrimaryCta({ label, onClick, className = '' }: PrimaryCtaProps) {
+  return (
+    <button
+      className={`button button--gold cta-primary ${className}`.trim()}
+      type="button"
+      data-primary-cta
+      onClick={onClick}
+    >
+      {label}
+    </button>
+  );
+}
 
 const faqs = [
   {
@@ -79,9 +124,11 @@ function mountSmbScroll(root: HTMLElement) {
   const acts = Array.from(root.querySelectorAll<HTMLElement>('[data-sc-act]')).map((element) => {
     const device = element.dataset.scAct || 'flow';
     const stage = element.querySelector<HTMLElement>('[data-sc-stage]');
-    if (device !== 'flow') {
+    if (device !== 'flow' && !reduceMotion) {
+      const desktopSpan = Number(element.dataset.scSpan || 1.5);
+      const mobileSpan = Number(element.dataset.scMobileSpan || desktopSpan);
       element.classList.add('sc-act--pinned');
-      element.style.height = `${Number(element.dataset.scSpan || 1.5) * 100}vh`;
+      element.style.height = `${(window.innerWidth <= 760 ? mobileSpan : desktopSpan) * 100}vh`;
       stage?.classList.add('sc-stage');
     }
     return {
@@ -122,12 +169,13 @@ function mountSmbScroll(root: HTMLElement) {
       sequence.width = width;
       sequence.height = height;
     }
-    const scale = Math.max(width / frame.naturalWidth, height / frame.naturalHeight) * 0.88;
+    const scale = Math.max(width / frame.naturalWidth, height / frame.naturalHeight);
     const drawWidth = frame.naturalWidth * scale;
     const drawHeight = frame.naturalHeight * scale;
+    const drawX = window.innerWidth <= 760 ? width - drawWidth : (width - drawWidth) / 2;
     context.fillStyle = '#090a0c';
     context.fillRect(0, 0, width, height);
-    context.drawImage(frame, (width - drawWidth) / 2, (height - drawHeight) / 2, drawWidth, drawHeight);
+    context.drawImage(frame, drawX, (height - drawHeight) / 2, drawWidth, drawHeight);
     currentFrame = index;
   };
 
@@ -137,6 +185,37 @@ function mountSmbScroll(root: HTMLElement) {
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
   root.querySelectorAll('[data-sc-in]').forEach((element) => revealObserver.observe(element));
+  root.querySelectorAll('[data-primary-cta]').forEach((element) => revealObserver.observe(element));
+
+  const countObservers: IntersectionObserver[] = [];
+  root.querySelectorAll<HTMLElement>('[data-count-target]').forEach((counter) => {
+    const target = Number(counter.dataset.countTarget || 0);
+    const decimals = Number(counter.dataset.countDecimals || 0);
+    const suffix = counter.dataset.countSuffix || '';
+    let played = false;
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries[0]?.isIntersecting || played) return;
+      played = true;
+      if (reduceMotion) {
+        counter.textContent = `${target.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}${suffix}`;
+        observer.disconnect();
+        return;
+      }
+      const started = performance.now();
+      const duration = 1250;
+      const animate = (now: number) => {
+        const progress = clamp((now - started) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = target * eased;
+        counter.textContent = `${value.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}${suffix}`;
+        if (progress < 1) requestAnimationFrame(animate);
+      };
+      requestAnimationFrame(animate);
+      observer.disconnect();
+    }, { threshold: 0.6 });
+    observer.observe(counter);
+    countObservers.push(observer);
+  });
 
   let awardPlayed = false;
   const award = root.querySelector<HTMLElement>('[data-sc-count]');
@@ -206,6 +285,7 @@ function mountSmbScroll(root: HTMLElement) {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', read);
       revealObserver.disconnect();
+      countObservers.forEach((observer) => observer.disconnect());
       awardObserver?.disconnect();
     },
   };
@@ -300,7 +380,14 @@ export default function Home() {
         if (hero && !reduce) {
           const rect = hero.getBoundingClientRect();
           const local = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height - window.innerHeight, 1)));
-          hero.style.setProperty('--hero-radius', `${20 + local * 78}%`);
+          hero.style.setProperty('--hero-scale', String(1 + local * 0.04));
+        }
+
+        const community = document.querySelector<HTMLElement>('#community');
+        if (community && !reduce) {
+          const rect = community.getBoundingClientRect();
+          const local = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+          community.style.setProperty('--community-p', String(local));
         }
       };
       updateSignature();
@@ -329,18 +416,17 @@ export default function Home() {
     <>
       <header className="site-header">
         <a className="brand-mark" href="#home" aria-label="SMB Fitness home">
-          <img src="/assets/smb-logo.png" alt="SMB Fitness" decoding="async" />
+          <img src="/assets/smb-logo-white.png" alt="SMB Fitness" decoding="async" />
         </a>
         <nav className="desktop-nav" aria-label="Primary navigation">
           <a href="#difference">About Us</a>
+          <a href="#community">Community</a>
           <a href="#programs">Programs</a>
           <a href="#resources">Free Resources</a>
           <a href="#membership">Membership</a>
           <a href="#faq">FAQs</a>
         </nav>
-        <button className="nav-cta" type="button" onClick={() => openConsultation()}>
-          Book your consultation
-        </button>
+        <PrimaryCta className="nav-cta" label="Book your free consultation" onClick={() => openConsultation()} />
         <button
           className="menu-button"
           type="button"
@@ -354,11 +440,12 @@ export default function Home() {
         {menuOpen && (
           <nav id="mobile-menu" className="mobile-nav" aria-label="Mobile navigation">
             <a href="#difference" onClick={() => setMenuOpen(false)}>About Us</a>
+            <a href="#community" onClick={() => setMenuOpen(false)}>Community</a>
             <a href="#programs" onClick={() => setMenuOpen(false)}>Programs</a>
             <a href="#resources" onClick={() => setMenuOpen(false)}>Free Resources</a>
             <a href="#membership" onClick={() => setMenuOpen(false)}>Membership</a>
             <a href="#faq" onClick={() => setMenuOpen(false)}>FAQs</a>
-            <button type="button" onClick={() => openConsultation()}>Book your consultation</button>
+            <PrimaryCta className="mobile-cta" label="Book your free consultation" onClick={() => openConsultation()} />
           </nav>
         )}
       </header>
@@ -373,7 +460,7 @@ export default function Home() {
       </aside>
 
       <main>
-        <section id="home" className="hero-act" data-sc-act="scrub" data-sc-span="3" data-sc-dwell="0.34" data-sc-drift="#090a0c">
+        <section id="home" className="hero-act" data-sc-act="scrub" data-sc-span="2.8" data-sc-mobile-span="2.1" data-sc-dwell="0.34" data-sc-drift="#090a0c">
           <div className="hero-stage" data-sc-stage>
             <div className="hero-film" aria-hidden="true">
               <canvas data-sc-sequence="/assets/frames/frame_{iiii}.webp:180:1" role="img" aria-label="SMB Fitness members training together" />
@@ -381,23 +468,46 @@ export default function Home() {
             </div>
             <div className="hero-vignette" />
             <div className="hero-copy align-left">
-              <p className="eyebrow" data-sc-cue="0 0.99 0.12 0.05">Strength that transforms your soul, mind, and body.</p>
+              <p className="eyebrow" data-sc-cue="0 0.99 0.12 0.05">Soul. Mind. Body.</p>
               <h1 data-sc-cue="0.02 0.99 0.12 0.05" data-sc-kinetic="lines">
                 Strong <span>mind.</span><br />
                 Strong <span>body.</span><br />
                 Strong <span>you.</span>
               </h1>
               <p className="hero-body" data-sc-cue="0.1 0.99 0.15 0.05">
-                A premium fitness experience built around expert guidance, personal attention, and a supportive community.
+                Real transformation begins when your mind believes what your body can become. Build lasting strength, confidence, and discipline with coaching designed to move your whole life forward.
               </p>
               <div className="hero-actions" data-sc-cue="0.16 0.99 0.14 0.05" data-sc-rise="0">
-                <button className="button button--gold" type="button" data-sc-magnet="0.18" onClick={() => openConsultation()}>
-                  Book your consultation
-                </button>
-                <a className="text-link" href="#programs">Explore programs <span aria-hidden="true">↘</span></a>
+                <PrimaryCta label="Book your free consultation" onClick={() => openConsultation()} />
+              </div>
+              <div className="hero-trust" data-sc-cue="0.2 0.99 0.12 0.05">
+                <div aria-label="4.9 out of 5 stars, Member Rating">
+                  <strong aria-hidden="true"><span data-count-target="4.9" data-count-decimals="1">4.9</span> ★</strong>
+                  <span aria-hidden="true">Member Rating</span>
+                </div>
+                <div aria-label="1,050 plus Members Joined">
+                  <strong aria-hidden="true" data-count-target="1050" data-count-suffix="+">1,050+</strong>
+                  <span aria-hidden="true">Members Joined</span>
+                </div>
               </div>
             </div>
             <p className="hero-note" data-sc-cue="0.18 0.99">Forney, Texas • In-person and virtual training</p>
+          </div>
+        </section>
+
+        <section id="community" className="community-section sc-section" data-sc-act="flow" data-sc-drift="#14213d">
+          <img className="community-watermark" src="/assets/smb-logo-white.png" alt="" aria-hidden="true" />
+          <div className="community-montage" aria-label="SMB Fitness members training together">
+            <figure className="community-card community-card--one" data-sc-in><img src="/assets/community-01.webp" alt="SMB Fitness members training with weight plates" loading="lazy" decoding="async" /></figure>
+            <figure className="community-card community-card--two" data-sc-in><img src="/assets/community-02.webp" alt="SMB Fitness member completing a supported training set" loading="lazy" decoding="async" /></figure>
+            <figure className="community-card community-card--three" data-sc-in><img src="/assets/community-03.webp" alt="SMB Fitness members training with resistance straps" loading="lazy" decoding="async" /></figure>
+            <figure className="community-card community-card--four" data-sc-in><img src="/assets/community-04.webp" alt="SMB Fitness members encouraging each other during an outdoor workout" loading="lazy" decoding="async" /></figure>
+          </div>
+          <div className="community-copy" data-sc-in>
+            <p className="eyebrow">The SMB Fitness community</p>
+            <h2>Come for the workout.<br /><span>Stay for the people.</span></h2>
+            <p>Good energy. Real encouragement. A community that celebrates every win and helps you keep showing up—one stronger day at a time.</p>
+            <PrimaryCta label="Find your place at SMB" onClick={() => openConsultation('SMB Fitness community')} />
           </div>
         </section>
 
@@ -425,7 +535,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="programs" className="program-act" data-sc-act="pan" data-sc-span="4.4" data-sc-drift="#090a0c">
+        <section id="programs" className="program-act" data-sc-act="pan" data-sc-span="5.4" data-sc-mobile-span="4.6" data-sc-drift="#090a0c">
           <div className="program-stage" data-sc-stage>
             <div className="program-rail" data-sc-pan="0.08">
               <article className="program-lead">
@@ -436,17 +546,17 @@ export default function Home() {
               </article>
               {programs.map((program, index) => (
                 <article className="program-panel" key={program.name}>
-                  <figure data-sc-tilt="4"><img src={program.image} alt={`${program.name} at SMB Fitness`} loading="lazy" decoding="async" /></figure>
+                  <figure data-sc-tilt="4"><img src={program.image} alt={program.alt} loading="lazy" decoding="async" /></figure>
                   <div className="program-meta"><span>{String(index + 1).padStart(2, '0')}</span><span>{program.pillar}</span></div>
                   <h3>{program.name}</h3>
                   <p>{program.copy}</p>
-                  <button className="program-link" type="button" onClick={() => openConsultation(program.name)}>Ask about this program <span aria-hidden="true">↗</span></button>
+                  <PrimaryCta className="program-cta" label="About this program" onClick={() => openConsultation(program.name)} />
                 </article>
               ))}
               <article className="program-exit">
                 <p className="eyebrow">Not sure where to begin?</p>
                 <h3>That is what the consultation is for.</h3>
-                <button className="button button--gold" type="button" onClick={() => openConsultation('Program guidance')}>Find your starting point</button>
+                <PrimaryCta label="Find your starting point" onClick={() => openConsultation('Program guidance')} />
               </article>
             </div>
           </div>
@@ -460,12 +570,12 @@ export default function Home() {
               <li data-sc-in><span>02</span><div><h3>Build the right plan</h3><p>Choose the service path that fits your needs, abilities, and schedule.</p></div></li>
               <li data-sc-in><span>03</span><div><h3>Train with support</h3><p>Move forward with coaching, accountability, and a community behind you.</p></div></li>
             </ol>
-            <button className="button button--dark" type="button" onClick={() => openConsultation()} data-sc-magnet="0.14">Book your consultation</button>
+            <PrimaryCta label="Book your free consultation" onClick={() => openConsultation()} />
           </div>
         </section>
 
         <section id="proof" className="proof-section sc-section" data-sc-act="flow" data-sc-drift="#14213d">
-          <div className="proof-image" data-sc-reveal="left" data-sc-reveal-at="0.06 0.44"><img src="/assets/program-5.webp" alt="Private fitness coaching at SMB Fitness" data-sc-parallax="-0.12" loading="lazy" decoding="async" /></div>
+          <div className="proof-image" data-sc-reveal="left" data-sc-reveal-at="0.06 0.44"><img src="/assets/service-07.webp" alt="SMB Fitness member discussing real progress with a coach" data-sc-parallax="-0.12" loading="lazy" decoding="async" /></div>
           <div className="proof-copy" data-sc-in>
             <p className="eyebrow">A member’s words</p>
             <blockquote>“I have come such a long way since working with Stacia, both physically and mentally! I’m stronger than I’ve ever been and have more confidence than I’ve had in a long time. Her ability to help you achieve results and her supportive nature have built a dedicated community that will truly improve your soul, mind and body!”</blockquote>
@@ -479,18 +589,18 @@ export default function Home() {
             <div data-sc-in><p className="eyebrow">Free resources</p><h2>Build a better starting point.</h2></div>
             <div className="resource-note" data-sc-in>
               <p>Ask SMB Fitness about current free resources for training, nutrition, and getting started with more confidence.</p>
-              <button className="text-link text-link--dark" type="button" onClick={() => openConsultation('Free resources')}>Ask about free resources <span aria-hidden="true">↗</span></button>
+              <PrimaryCta label="Ask about free resources" onClick={() => openConsultation('Free resources')} />
             </div>
           </div>
         </section>
 
         <section id="membership" className="membership-section sc-section" data-sc-act="flow" data-sc-drift="#090a0c">
-          <div className="membership-photo" data-sc-reveal="right" data-sc-reveal-at="0.08 0.58"><img src="/assets/program-6.webp" alt="SMB Fitness specialty training" loading="lazy" decoding="async" /></div>
+          <div className="membership-photo" data-sc-reveal="right" data-sc-reveal-at="0.08 0.58"><img src="/assets/service-05.webp" alt="SMB Fitness specialty group training program" loading="lazy" decoding="async" /></div>
           <div className="membership-copy" data-sc-in>
             <p className="eyebrow">Membership</p>
             <h2>The right support starts with the right conversation.</h2>
             <p>SMB membership guidance is personal. Use the consultation to understand current options, availability, and which program best fits your goals.</p>
-            <button className="button button--gold" type="button" onClick={() => openConsultation('Membership options')}>Explore membership</button>
+            <PrimaryCta label="Explore membership" onClick={() => openConsultation('Membership options')} />
           </div>
         </section>
 
@@ -510,11 +620,12 @@ export default function Home() {
 
         <section id="contact" className="close-act" data-sc-act="pin" data-sc-span="1.2" data-sc-drift="#090a0c">
           <div className="close-stage" data-sc-stage data-sc-spotlight>
+            <img className="close-logo-watermark" src="/assets/smb-logo-white.png" alt="" aria-hidden="true" />
             <div className="close-statement align-left">
               <p className="eyebrow" data-sc-cue="0 0.99">Your next chapter can start here.</p>
               <h2 data-sc-cue="0.04 0.99" data-sc-kinetic="lines">Ready to feel stronger in every part of your life?</h2>
               <p data-sc-cue="0.1 0.99">Let’s talk about your goals and the kind of support that will help you move forward.</p>
-              <button className="button button--gold" type="button" data-sc-magnet="0.2" data-sc-cue="0.14 0.99" data-sc-rise="0" onClick={() => openConsultation()}>Book your consultation</button>
+              <div data-sc-cue="0.14 0.99" data-sc-rise="0"><PrimaryCta label="Book your free consultation" onClick={() => openConsultation()} /></div>
             </div>
             <footer className="site-footer">
               <span>SMB Fitness</span><a href="tel:+12142398505">214-239-8505</a><a href="mailto:info@smb.fitness">info@smb.fitness</a><span>Forney, Texas</span>
