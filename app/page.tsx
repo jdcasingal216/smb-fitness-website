@@ -187,6 +187,25 @@ function mountSmbScroll(root: HTMLElement) {
     };
   });
 
+  const sizeActs = () => {
+    if (reduceMotion) return;
+    const viewportHeight = window.innerHeight;
+    acts.forEach((act) => {
+      if (act.device === 'flow') return;
+      if (act.rail) {
+        const viewportWidth = act.rail.parentElement?.clientWidth || window.innerWidth;
+        const distance = Math.max(act.rail.scrollWidth - viewportWidth + viewportWidth * 0.08, 0);
+        // One vertical pixel advances the rail by one horizontal pixel. This
+        // keeps every card reachable without padding the story with dead space.
+        act.element.style.setProperty('height', `${Math.max(viewportHeight * 1.35, viewportHeight + distance)}px`, 'important');
+        return;
+      }
+      const desktopSpan = Number(act.element.dataset.scSpan || 1.5);
+      const mobileSpan = Number(act.element.dataset.scMobileSpan || desktopSpan);
+      act.element.style.setProperty('height', `${(window.innerWidth <= 760 ? mobileSpan : desktopSpan) * viewportHeight}px`, 'important');
+    });
+  };
+
   const hero = acts.find((act) => act.canvas);
   const sequence = hero?.canvas;
   const frames: HTMLImageElement[] = [];
@@ -288,7 +307,11 @@ function mountSmbScroll(root: HTMLElement) {
         const readableProgress = act.element.id === 'home' && window.scrollY < 40
           ? Math.max(progress, 0.32)
           : (progress === 0 && rect.top <= 1 ? 0.16 : progress);
-        const enter = clamp((readableProgress - from) / 0.12);
+        // A third cue value of `0` marks essential "ground" content. It is
+        // visible as soon as the act enters, preventing an empty pinned frame
+        // while the remaining copy still sequences with scroll progress.
+        const greet = values.length >= 3 && values[2] === 0;
+        const enter = greet ? 1 : clamp((readableProgress - from) / 0.12);
         const exit = to >= 0.98 ? 1 : clamp((to - readableProgress) / 0.14);
         const opacity = Math.min(enter, exit);
         cue.style.opacity = String(opacity);
@@ -306,15 +329,21 @@ function mountSmbScroll(root: HTMLElement) {
       ticking = false;
     });
   };
+  const onResize = () => {
+    sizeActs();
+    read();
+  };
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', read);
+  window.addEventListener('resize', onResize);
+  sizeActs();
   read();
+  void document.fonts?.ready.then(onResize);
 
   return {
     destroy() {
       document.documentElement.classList.remove('sc-ready');
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', read);
+      window.removeEventListener('resize', onResize);
       revealObserver.disconnect();
       trustObserver?.disconnect();
       window.removeEventListener('scroll', playTrustCounters);
@@ -375,7 +404,12 @@ export default function Home() {
     let cancelled = false;
     let raf = 0;
     let scrollcraft: { destroy?: () => void } | undefined;
-    let lenis: { raf: (time: number) => void; on: (event: string, cb: () => void) => void; destroy: () => void } | undefined;
+    let lenis: {
+      raf: (time: number) => void;
+      on: (event: string, cb: () => void) => void;
+      scrollTo: (target: Element | number, options?: { offset?: number; duration?: number }) => void;
+      destroy: () => void;
+    } | undefined;
     const cleanups: Array<() => void> = [];
 
     void (async () => {
@@ -412,6 +446,23 @@ export default function Home() {
         });
         cleanups.push(() => marqueeTween.kill());
       }
+
+      const handleAnchorClick = (event: MouseEvent) => {
+        const anchor = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href^="#"]');
+        const hash = anchor?.getAttribute('href');
+        if (!hash || hash === '#') return;
+        const target = document.querySelector(hash);
+        if (!target) return;
+        event.preventDefault();
+        window.history.pushState(null, '', hash);
+        if (reduce) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          lenis?.scrollTo(target, { offset: -78, duration: 1.05 });
+        }
+      };
+      document.addEventListener('click', handleAnchorClick);
+      cleanups.push(() => document.removeEventListener('click', handleAnchorClick));
 
       scrollcraft = window.ScrollCraft?.mount(document.body) ?? mountSmbScroll(document.body);
 
@@ -556,7 +607,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="community" className="community-section" data-sc-act="pan" data-sc-span="2.7" data-sc-mobile-span="2.2" data-sc-mobile-flow="true" data-sc-drift="#14213d">
+        <section id="community" className="community-section" data-sc-act="pan" data-sc-span="2.7" data-sc-mobile-span="2.2" data-sc-drift="#14213d">
           <div className="community-stage" data-sc-stage>
             <img className="community-watermark" src="/assets/smb-logo-white.png" alt="" aria-hidden="true" />
             <div className="community-copy" data-sc-in>
@@ -564,12 +615,6 @@ export default function Home() {
               <h2>Come for the workout.<br /><span>Stay for the people.</span></h2>
               <p>Good energy. Real encouragement. A community that celebrates every win and helps you keep showing up—one stronger day at a time.</p>
               <PrimaryCta label="Find your place at SMB" onClick={() => openConsultation('SMB Fitness community')} />
-              <div id="about" className="about-us-panel">
-                <p className="eyebrow">About us</p>
-                <p><strong>SMB Fitness is a veteran owned personal training service business.</strong></p>
-                <p>SMB Fitness is a brand that promotes transformation within the soul, mind, and body. We believe that your body can withstand almost anything. Once you convince your mind you are unstoppable! That&apos;s where the real transformation starts. We take pride and are passionate about getting you to your goals!</p>
-                <p>Our programs will not only motivate you but build your self-confidence and increase discipline allowing you to unleash your fullest potential.</p>
-              </div>
             </div>
             <div className="community-viewport" aria-label="SMB Fitness community photo story">
               <div className="community-montage" data-sc-pan="0.08" data-sc-direction="reverse">
@@ -585,9 +630,24 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="about" className="about-section sc-section" data-sc-act="flow" data-sc-drift="#14213d">
+          <div className="section-shell about-shell">
+            <div className="about-heading" data-sc-in>
+              <p className="eyebrow">About SMB Fitness</p>
+              <h2>Built for the whole person.</h2>
+              <p className="about-veteran">Veteran owned. Purpose driven. Rooted in Forney.</p>
+            </div>
+            <div className="about-copy" data-sc-in>
+              <p><strong>SMB Fitness is a veteran owned personal training service business.</strong></p>
+              <p>SMB Fitness is a brand that promotes transformation within the soul, mind, and body. We believe that your body can withstand almost anything. Once you convince your mind you are unstoppable! That&apos;s where the real transformation starts. We take pride and are passionate about getting you to your goals!</p>
+              <p>Our programs will not only motivate you but build your self-confidence and increase discipline allowing you to unleash your fullest potential.</p>
+            </div>
+          </div>
+        </section>
+
         <section id="difference" className="difference-section sc-section" data-sc-act="flow" data-sc-drift="#14213d">
           <div className="soul-marquee" aria-hidden="true"><div className="soul-marquee__track">SOUL • MIND • BODY • SOUL • MIND • BODY •</div></div>
-          <div className="section-shell difference-intro" data-sc-in data-sc-stagger="90">
+          <div className="section-shell difference-intro">
             <div><p className="eyebrow">The SMB difference</p><h2>Fitness should change more than a number.</h2></div>
             <p className="lede">SMB Fitness is built around the whole person. The work is physical, but the transformation reaches further.</p>
           </div>
@@ -601,8 +661,8 @@ export default function Home() {
         <section id="challenges" className="challenge-act" data-sc-act="pin" data-sc-span="1.3" data-sc-drift="#0d0f13">
           <div className="challenge-stage" data-sc-stage>
             <div className="challenge-copy align-right">
-              <p className="eyebrow" data-sc-cue="0 0.98">When doing it alone stops working</p>
-              <h2 data-sc-cue="0.04 0.98" data-sc-kinetic="lines">Starting again should not feel like starting alone.</h2>
+              <p className="eyebrow" data-sc-cue="0 0.98 0">When doing it alone stops working</p>
+              <h2 data-sc-cue="0 0.98 0" data-sc-kinetic="lines">Starting again should not feel like starting alone.</h2>
               <p data-sc-cue="0.1 0.98">Maybe the plan keeps changing. Maybe you are working hard without knowing what to adjust. Maybe the gym has never felt built for you.</p>
               <p className="challenge-turn" data-sc-cue="0.22 0.98">SMB begins with understanding before intensity.</p>
             </div>
@@ -670,8 +730,8 @@ export default function Home() {
 
         <section id="resources" className="resources-section sc-section" data-sc-act="flow" data-sc-drift="#f3f0ea">
           <div className="section-shell resources-shell">
-            <div data-sc-in><p className="eyebrow">Free resources</p><h2>Build a better starting point.</h2></div>
-            <div className="resource-note" data-sc-in>
+            <div><p className="eyebrow">Free resources</p><h2>Build a better starting point.</h2></div>
+            <div className="resource-note">
               <p>Ask SMB Fitness about current free resources for training, nutrition, and getting started with more confidence.</p>
               <PrimaryCta label="Ask about free resources" onClick={() => openConsultation('Free resources')} />
             </div>
@@ -690,19 +750,21 @@ export default function Home() {
 
         <section id="client-wins" className="client-wins-section" data-sc-act="pan" data-sc-span="3.8" data-sc-mobile-span="3.2" data-sc-drift="#14213d">
           <div className="client-wins-stage" data-sc-stage>
-            <div className="client-wins-gallery" data-sc-pan="0.08" aria-label="SMB Fitness client progress gallery">
-              <article className="client-wins-intro">
-                <p className="eyebrow">Real progress. Real people.</p>
-                <h2>Client <span>wins.</span></h2>
-                <p>Every transformation has its own pace, challenges, and victories. These are real SMB Fitness clients building strength, confidence, and consistency one decision at a time.</p>
-                <PrimaryCta label="Start your own story" onClick={() => openConsultation('Client wins')} />
-              </article>
-              {clientWins.map((win) => (
-                <figure className="client-win-card" key={win.id}>
-                  <img src={win.image} alt={win.alt} loading="lazy" decoding="async" />
-                  <figcaption><span>Client win</span><strong>{win.id}</strong></figcaption>
-                </figure>
-              ))}
+            <article className="client-wins-intro">
+              <p className="eyebrow">Real progress. Real people.</p>
+              <h2>Client <span>wins.</span></h2>
+              <p>Every transformation has its own pace, challenges, and victories. These are real SMB Fitness clients building strength, confidence, and consistency one decision at a time.</p>
+              <PrimaryCta label="Start your own story" onClick={() => openConsultation('Client wins')} />
+            </article>
+            <div className="client-wins-viewport">
+              <div className="client-wins-gallery" data-sc-pan="0.08" aria-label="SMB Fitness client progress gallery">
+                {clientWins.map((win) => (
+                  <figure className="client-win-card" key={win.id}>
+                    <img src={win.image} alt={win.alt} loading="lazy" decoding="async" />
+                    <figcaption><span>Client win</span><strong>{win.id}</strong></figcaption>
+                  </figure>
+                ))}
+              </div>
             </div>
             <p className="client-wins-note">Individual results vary. Each image reflects one client’s personal journey.</p>
           </div>
@@ -726,8 +788,8 @@ export default function Home() {
           <div className="close-stage" data-sc-stage data-sc-spotlight>
             <img className="close-logo-watermark" src="/assets/smb-logo-white.png" alt="" aria-hidden="true" />
             <div className="close-statement align-left">
-              <p className="eyebrow" data-sc-cue="0 0.99">Your next chapter can start here.</p>
-              <h2 data-sc-cue="0.04 0.99" data-sc-kinetic="lines">Ready to feel stronger in every part of your life?</h2>
+              <p className="eyebrow" data-sc-cue="0 0.99 0">Your next chapter can start here.</p>
+              <h2 data-sc-cue="0 0.99 0" data-sc-kinetic="lines">Ready to feel stronger in every part of your life?</h2>
               <p data-sc-cue="0.1 0.99">Let’s talk about your goals and the kind of support that will help you move forward.</p>
               <div data-sc-cue="0.14 0.99" data-sc-rise="0"><PrimaryCta label="Book your free consultation" onClick={() => openConsultation()} /></div>
             </div>
