@@ -82,6 +82,11 @@ const clientWins = [
     alt: 'Side-profile progress photos from an SMB Fitness client journey',
   },
   {
+    id: '03',
+    image: '/assets/client-win-03.jpg',
+    alt: 'Before-and-after progress photos from an SMB Fitness client journey',
+  },
+  {
     id: '04',
     image: '/assets/client-win-04.webp',
     alt: 'Front-view progress photos from an SMB Fitness client journey',
@@ -168,7 +173,9 @@ function mountSmbScroll(root: HTMLElement) {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const acts = Array.from(root.querySelectorAll<HTMLElement>('[data-sc-act]')).map((element) => {
     const requestedDevice = element.dataset.scAct || 'flow';
-    const device = element.dataset.scMobileFlow === 'true' && window.innerWidth <= 760 ? 'flow' : requestedDevice;
+    const mobileFlow = element.dataset.scMobileFlow === 'true' && window.innerWidth <= 760;
+    const tabletFlow = element.dataset.scTabletFlow === 'true' && window.innerWidth <= 1100;
+    const device = mobileFlow || tabletFlow ? 'flow' : requestedDevice;
     const stage = element.querySelector<HTMLElement>('[data-sc-stage]');
     if (device !== 'flow' && !reduceMotion) {
       const desktopSpan = Number(element.dataset.scSpan || 1.5);
@@ -183,6 +190,7 @@ function mountSmbScroll(root: HTMLElement) {
       stage,
       rail: element.querySelector<HTMLElement>('[data-sc-pan]'),
       canvas: element.querySelector<HTMLCanvasElement>('canvas[data-sc-sequence]'),
+      video: element.querySelector<HTMLVideoElement>('[data-sc-video]'),
       cues: Array.from(element.querySelectorAll<HTMLElement>('[data-sc-cue]')),
     };
   });
@@ -237,7 +245,10 @@ function mountSmbScroll(root: HTMLElement) {
     const scale = Math.max(width / frame.naturalWidth, height / frame.naturalHeight);
     const drawWidth = frame.naturalWidth * scale;
     const drawHeight = frame.naturalHeight * scale;
-    const drawX = window.innerWidth <= 760 ? width - drawWidth : (width - drawWidth) / 2;
+    const centeredX = (width - drawWidth) / 2;
+    const drawX = window.innerWidth <= 760
+      ? width - drawWidth
+      : Math.min(0, centeredX + width * 0.065);
     context.fillStyle = '#090a0c';
     context.fillRect(0, 0, width, height);
     context.drawImage(frame, drawX, (height - drawHeight) / 2, drawWidth, drawHeight);
@@ -294,6 +305,12 @@ function mountSmbScroll(root: HTMLElement) {
       const progress = clamp(-rect.top / travel);
 
       if (act.canvas) drawFrame(Math.round(progress * (frames.length - 1)));
+      if (act.video && window.innerWidth <= 1100 && act.video.readyState >= 1 && Number.isFinite(act.video.duration)) {
+        const targetTime = progress * Math.min(act.video.duration, 20);
+        if (Math.abs(act.video.currentTime - targetTime) > 0.035) {
+          try { act.video.currentTime = targetTime; } catch { /* Media is not seekable yet. */ }
+        }
+      }
       if (act.rail) {
         const viewportWidth = act.rail.parentElement?.clientWidth || window.innerWidth;
         const distance = Math.max(act.rail.scrollWidth - viewportWidth + viewportWidth * 0.08, 0);
@@ -517,6 +534,7 @@ export default function Home() {
         <a className="brand-mark" href="#home" aria-label="SMB Fitness home">
           <img src="/assets/smb-logo-white.png" alt="SMB Fitness" decoding="async" />
         </a>
+        <a className="mobile-header-phone" href="tel:+12142398505" aria-label="Call SMB Fitness at 214-239-8505">+1 214-239-8505</a>
         <nav className="desktop-nav" aria-label="Primary navigation">
           <a href="#about">About Us</a>
           <a href="#community">Community</a>
@@ -550,7 +568,7 @@ export default function Home() {
             <a href="#membership" onClick={() => setMenuOpen(false)}>Membership</a>
             <a href="#client-wins" onClick={() => setMenuOpen(false)}>Client Wins</a>
             <a href="#faq" onClick={() => setMenuOpen(false)}>FAQs</a>
-            <a href="tel:+12142398505" onClick={() => setMenuOpen(false)}>+1 214-239-8505</a>
+            <a className="tablet-menu-phone" href="tel:+12142398505" onClick={() => setMenuOpen(false)}>+1 214-239-8505</a>
             <a href="mailto:info@smb.fitness" onClick={() => setMenuOpen(false)}>info@smb.fitness</a>
             <PrimaryCta className="mobile-cta" label="Book your free consultation" onClick={() => openConsultation()} />
           </nav>
@@ -574,8 +592,8 @@ export default function Home() {
               <video className="hero-poster" muted playsInline preload="metadata" poster="/assets/hero-poster.jpg">
                 <source src="/assets/hero-smbf.mp4" type="video/mp4" />
               </video>
-              <video className="hero-mobile-video" autoPlay muted loop playsInline preload="metadata" poster="/assets/hero-poster.jpg">
-                <source src="/assets/hero-smbf-mobile.mp4" type="video/mp4" />
+              <video className="hero-mobile-video" data-sc-video muted playsInline preload="auto" poster="/assets/hero-poster.jpg">
+                <source src="/assets/hero-smbf.mp4" type="video/mp4" />
               </video>
             </div>
             <div className="hero-vignette" />
@@ -597,8 +615,8 @@ export default function Home() {
                   <strong aria-hidden="true"><span data-count-target="4.9" data-count-decimals="1">0.0</span>/5</strong>
                   <span aria-hidden="true">Star Rating</span>
                 </div>
-                <div aria-label="2,050 Members Joined">
-                  <strong aria-hidden="true" data-count-target="2050">0</strong>
+                <div aria-label="2,050 plus Members Joined">
+                  <strong aria-hidden="true" data-count-target="2050" data-count-suffix="+">0</strong>
                   <span aria-hidden="true">Members Joined</span>
                 </div>
               </div>
@@ -649,7 +667,10 @@ export default function Home() {
           <div className="soul-marquee" aria-hidden="true"><div className="soul-marquee__track">SOUL • MIND • BODY • SOUL • MIND • BODY •</div></div>
           <div className="section-shell difference-intro">
             <div><p className="eyebrow">The SMB difference</p><h2>Fitness should change more than a number.</h2></div>
-            <p className="lede">SMB Fitness is built around the whole person. The work is physical, but the transformation reaches further.</p>
+            <div className="difference-story">
+              <figure className="difference-community-photo"><img src="/assets/fitness-more-than-number.jpg" alt="SMB Fitness members and families celebrating together inside the Forney gym" loading="lazy" decoding="async" /></figure>
+              <p className="lede">SMB Fitness is built around the whole person. The work is physical, but the transformation reaches further.</p>
+            </div>
           </div>
           <div className="pillar-stack section-shell">
             <article data-sc-in><span>01</span><h3>Soul</h3><p>A community that sees the whole person and makes space for every starting point.</p></article>
@@ -658,7 +679,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="challenges" className="challenge-act" data-sc-act="pin" data-sc-span="1.3" data-sc-drift="#0d0f13">
+        <section id="challenges" className="challenge-act" data-sc-act="pin" data-sc-span="1.3" data-sc-tablet-flow="true" data-sc-drift="#0d0f13">
           <div className="challenge-stage" data-sc-stage>
             <div className="challenge-copy align-right">
               <p className="eyebrow" data-sc-cue="0 0.98 0">When doing it alone stops working</p>
@@ -800,11 +821,14 @@ export default function Home() {
                 <a href="mailto:info@smb.fitness"><FooterIcon name="email" /><span>info@smb.fitness</span></a>
                 <span><FooterIcon name="location" /><span>Forney, Texas</span></span>
               </div>
-              <div className="footer-hours"><FooterIcon name="clock" /><div><span>Mon–Thu — 5:00AM–8:00PM</span><span>Sat — 7:00AM–12:00PM</span><span>Sun — Closed</span></div></div>
-              <div className="footer-social" aria-label="Social media">
-                <a href="https://www.instagram.com/_smbfitness?igsi=bTVkYWVocmw2NmMx" target="_blank" rel="noreferrer" aria-label="SMB Fitness on Instagram"><FooterIcon name="instagram" /></a>
-                <a href="https://www.facebook.com/smbfitnesss/" target="_blank" rel="noreferrer" aria-label="SMB Fitness on Facebook"><FooterIcon name="facebook" /></a>
+              <div className="footer-follow">
+                <strong>Follow us</strong>
+                <div className="footer-social" aria-label="Social media">
+                  <a href="https://www.instagram.com/_smbfitness?igsi=bTVkYWVocmw2NmMx" target="_blank" rel="noreferrer" aria-label="SMB Fitness on Instagram"><FooterIcon name="instagram" /></a>
+                  <a href="https://www.facebook.com/smbfitnesss/" target="_blank" rel="noreferrer" aria-label="SMB Fitness on Facebook"><FooterIcon name="facebook" /></a>
+                </div>
               </div>
+              <div className="footer-hours"><FooterIcon name="clock" /><div><span>Mon–Thu — 5:00AM–8:00PM</span><span>Sat — 7:00AM–12:00PM</span><span>Sun — Closed</span></div></div>
             </footer>
           </div>
         </section>
